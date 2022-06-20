@@ -37,6 +37,7 @@ Simple text UI chat application, straight out of the 80s. Feature-poor, but has 
 * structuring the repo a bit better
 * perhaps some basic security checks in passwords and such, reserving some system usernames, escaping names (formatting can be used in them)
 * more colours in the UI
+* better exception handling
 
 ## Things that could be added
 
@@ -44,3 +45,5 @@ Simple text UI chat application, straight out of the 80s. Feature-poor, but has 
 * logging chat messages into the database, persistent chat rooms, loading chat history from the DB
 * server logs for debugging
 * blessed has a lot of support for advanced stuff like images and videos - might be a fun feature
+* setting user username colours
+* user-created rooms, ownership of rooms, kicking people, blocking people... room permissions in general
