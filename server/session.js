@@ -21,13 +21,11 @@ export default class Session extends EventEmitter
 
     send(message) {
         if (message instanceof Message) {
-            console.log(message.serialize());
             this.socket.send(message.serialize());
         }
     }
 
     joinRoom(room) {
-        console.log('joining room')
         if (this.room) {
             this.room.removeSession(this);
         }
@@ -38,12 +36,10 @@ export default class Session extends EventEmitter
     }
 
     leaveRoom(room) {
-
+        this.room.removeSession(this);
     }
 
     async onMessage(data) {
-        console.log(data);
-
         let response = null;
 
         try {
@@ -76,7 +72,6 @@ export default class Session extends EventEmitter
     async login(username, password) {
         try {
             const result = await UserStore.login(username, password);
-            console.log(result);
             this.user = result;
             this.emit('loggedin');
             return new LoginResponse(true, "Login successful");
@@ -85,7 +80,6 @@ export default class Session extends EventEmitter
             
             if (e instanceof Error) {
                 message = e.message;    
-                console.log(e)
             }
 
             return new LoginResponse(false, message);
@@ -105,6 +99,12 @@ export default class Session extends EventEmitter
             }
 
             return new RegistrationResponse(false, message);
+        }
+    }
+
+    disconnect() {
+        if (this.room) {
+            this.leaveRoom(this.room);
         }
     }
 }

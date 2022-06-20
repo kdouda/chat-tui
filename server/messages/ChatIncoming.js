@@ -16,6 +16,10 @@ export default class ChatIncomingMessage extends Message {
         return this.data.text.trim()
     }
 
+    get username() {
+        this.data.username;
+    }
+
     serialize() {
         return {
             type: this.type,

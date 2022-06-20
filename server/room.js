@@ -2,6 +2,7 @@ import User from './user.js';
 import Session from './session.js';
 import ChatOutgoingMessage from './messages/ChatOutgoing.js';
 import ChatIncomingMessage from './messages/ChatIncoming.js';
+import UsersInRoom from './messages/UsersInRoom.js';
 
 export default class Room {
 
@@ -34,7 +35,6 @@ export default class Room {
     sendMessageToRoom(session, message) {
         if (session instanceof Session) {
             const msg = new ChatIncomingMessage(session.user.username, message);
-            console.log(`${this.displayName}: sending message: ${message}`)
             this.io.to(this.internalName).emit("message", msg.serialize());
         }
     }
@@ -45,10 +45,11 @@ export default class Room {
     }
 
     sendMessageMemberList() {
-        
+        const msg = new UsersInRoom(this.usersInRoom);
+        this.io.to(this.internalName).emit("message", msg.serialize());
     }
 
     get usersInRoom() {
-        return this.users.map(x => x.username);
+        return this.users.map(x => x.user.username);
     }
 }

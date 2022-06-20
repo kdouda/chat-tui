@@ -5,6 +5,7 @@ import Login from './Login.js';
 import LoginResponse from './LoginResponse.js';
 import ChatIncomingMessage from './ChatIncoming.js';
 import ChatOutgoingMessage from './ChatOutgoing.js';
+import UsersInRoom from './UsersInRoom.js';
 
 const types = {};
 
@@ -14,9 +15,9 @@ types[MessageTypes.LOGIN] = Login;
 types[MessageTypes.REGISTRATION] = Registration;
 types[MessageTypes.CHAT_INCOMING] = ChatIncomingMessage;
 types[MessageTypes.CHAT_OUTGOING] = ChatOutgoingMessage;
+types[MessageTypes.USERS_IN_ROOM] = UsersInRoom;
 
 export default (type, data) => {
-    console.log(type, data);
     return new Promise((resolve, reject) => {
         if (type in types) {
             const deserialized = new types[type](...Object.values(data))

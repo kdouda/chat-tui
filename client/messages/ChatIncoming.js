@@ -13,7 +13,7 @@ export default class ChatIncomingMessage extends Message {
     }
 
     get text() {
-        return this.data.text.trim();
+        return this.data.text.trim()
     }
 
     get username() {

@@ -21,7 +21,7 @@ export default function (screen) {
 
         const list = blessed.list({
             parent: box,
-            label: 'People on-line',
+            label: ' People on-line ',
             keys: true,
             interactive: true,
             vi: true,
@@ -119,6 +119,18 @@ export default function (screen) {
             chatBox.scroll(1);
             screen.render();
         });
+
+        app.on('userListUpdated', (data) => {
+            list.clearItems();
+            data.users.forEach(x => { list.addItem(x); });
+            screen.render();
+        });
+
+        if (app.usersInChat) {
+            app.usersInChat.forEach((x) => {
+                list.addItem(x);
+            });
+        }
 
         screen.render();
     });

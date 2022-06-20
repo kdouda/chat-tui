@@ -24,19 +24,16 @@ io.on('connection', (socket) => {
     })
 
     socket.on('message', (data) => {
-        console.log(data);
         session.onMessage(data);
     });
 
     socket.on("disconnecting", () => {
-        console.log(socket.rooms); // the Set contains at least the socket ID
+        session.disconnect();
     });
 
     socket.on("disconnect", () => {
         // socket.rooms.size === 0
     });
-
-    console.log('a user connected');
 });
 
 server.listen(3000, () => {

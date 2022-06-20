@@ -17,4 +17,12 @@ export default class RegistrationMessage extends Message {
             data: this.data
         }
     }
+
+    get username() {
+        return this.data.username;
+    }
+
+    get password() {
+        return this.data.password;
+    }
 }

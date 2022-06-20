@@ -9,6 +9,7 @@ import LoginMessage from "./messages/Login.js";
 import LoginResponse from "./messages/LoginResponse.js";
 import ChatOutgoingMessage from "./messages/ChatOutgoing.js";
 import ChatIncomingMessage from "./messages/ChatIncoming.js";
+import UsersInRoom from "./messages/UsersInRoom.js";
 
 const STATE = {
     MENU: 'menu',
@@ -45,6 +46,8 @@ class WaitingPromiseTask {
 class App extends EventEmitter {
     init() {
         this.waitingPromiseTasks = [];
+        this.usersInChat = [];
+
         this.appState = STATE.MENU;
 
         return new Promise((resolve, reject) => {
@@ -96,6 +99,11 @@ class App extends EventEmitter {
                 this.emit('chat', { from: message.username, text: message.text })
             }
     
+            if (message instanceof UsersInRoom) {
+                this.usersInChat = message.users;
+                this.emit('userListUpdated', { users: message.users });
+            }
+
         } catch (e) {
             console.log(e)
         }

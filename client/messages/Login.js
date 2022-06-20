@@ -17,4 +17,12 @@ export default class LoginMessage extends Message {
             data: this.data
         }
     }
+
+    get username() {
+        return this.data.username;
+    }
+
+    get password() {
+        return this.data.password;
+    }
 }
