@@ -14,6 +14,15 @@ Simple text UI chat application, straight out of the 80s. Feature-poor, but has 
 * list of connected users, system messages when a user leaves or join the room
 * relatively light-weight client
 
+## How to run it
+
+* install dependencies (npm i) in both directories
+* to run the server, type node ./server.js
+* to run the client, type node ./client.js
+* use tab to switch between ui elements, arrow keys to navigate in lists / menus
+* press ESC to exit the application at any time
+
+
 ## Drawbacks and known issues
 
 * users can log into the same account simultaneously (not really an issue, but it should at least notify the user?)
@@ -22,6 +31,7 @@ Simple text UI chat application, straight out of the 80s. Feature-poor, but has 
 * application will lose state on a server crash, the client would not know
 * poor UI
 * chat message is not removed from chat input box after sending it - couldn't get it to work, not very important
+* connects only to localhost, should prompt user for address to connect to?
 
 ## Things I would do differently for a production project
 
@@ -38,6 +48,7 @@ Simple text UI chat application, straight out of the 80s. Feature-poor, but has 
 * perhaps some basic security checks in passwords and such, reserving some system usernames, escaping names (formatting can be used in them)
 * more colours in the UI
 * better exception handling
+* npm scripts to run chat and client
 
 ## Things that could be added
 
